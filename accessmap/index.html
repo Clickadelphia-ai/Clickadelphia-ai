@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AccessMap — Find Accessible Places Near You</title>
+  <meta name="description" content="Search a map for wheelchair-accessible places, accessible restrooms, parking and more." />
+
+  <!-- Leaflet CSS -->
+  <link
+    rel="stylesheet"
+    href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+    integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+    crossorigin=""
+  />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <a class="skip-link" href="#map">Skip to map</a>
+
+  <header class="app-header">
+    <div class="brand">
+      <span class="brand-icon" aria-hidden="true">♿</span>
+      <h1>AccessMap</h1>
+    </div>
+    <p class="tagline">Search the map for accessible places near you</p>
+  </header>
+
+  <div class="layout">
+    <aside class="sidebar" aria-label="Search and filters">
+      <form id="search-form" class="search-box">
+        <label for="place-search">Find a location</label>
+        <div class="search-row">
+          <input
+            type="text"
+            id="place-search"
+            name="place-search"
+            placeholder="e.g. London, Paris, 10001…"
+            autocomplete="off"
+          />
+          <button type="submit" id="go-btn">Go</button>
+        </div>
+        <button type="button" id="locate-btn" class="secondary-btn">
+          <span aria-hidden="true">📍</span> Use my location
+        </button>
+      </form>
+
+      <fieldset class="filters">
+        <legend>Show places that are…</legend>
+        <label class="chk">
+          <input type="checkbox" id="f-wheelchair" checked />
+          Wheelchair accessible
+        </label>
+        <label class="chk">
+          <input type="checkbox" id="f-toilets" />
+          Accessible toilets
+        </label>
+        <label class="chk">
+          <input type="checkbox" id="f-parking" />
+          Accessible parking
+        </label>
+
+        <label class="level-label" for="f-level">Minimum access level</label>
+        <select id="f-level">
+          <option value="all">Any (incl. limited)</option>
+          <option value="yes">Fully accessible only</option>
+        </select>
+      </fieldset>
+
+      <button type="button" id="search-area-btn" class="primary-btn">
+        🔍 Search this area
+      </button>
+
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+
+      <section class="legend" aria-label="Map legend">
+        <h2>Legend</h2>
+        <ul>
+          <li><span class="dot dot-yes"></span> Fully accessible</li>
+          <li><span class="dot dot-limited"></span> Limited access</li>
+          <li><span class="dot dot-no"></span> Not accessible</li>
+          <li><span class="dot dot-unknown"></span> Unknown / not tagged</li>
+        </ul>
+      </section>
+
+      <ul id="results-list" class="results" aria-label="Search results"></ul>
+
+      <footer class="credits">
+        Data © <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">OpenStreetMap</a> contributors ·
+        via <a href="https://overpass-api.de/" target="_blank" rel="noopener">Overpass API</a>
+      </footer>
+    </aside>
+
+    <main id="map" aria-label="Interactive accessibility map"></main>
+  </div>
+
+  <!-- Leaflet JS -->
+  <script
+    src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin=""
+  ></script>
+  <script src="app.js"></script>
+</body>
+</html>
